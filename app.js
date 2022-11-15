@@ -7,19 +7,19 @@ console.log("EXERCISE 1:\n==========\n");
 let searchWord = document.querySelector("#searchWord");
 let submitButton = document.querySelector("#submitSearch");
 let imgRes = document.querySelector("img");
+let feedback = document.querySelector("#feedback");
 
 //initializing event listeners
 submitButton.addEventListener("click", imageSearch);
 
 function imageSearch (){
+    imgRes.src = "#";
     let queryValue = searchWord.value;
-    console.log(queryValue);
     getImage(queryValue);
-
-}
+    searchWord.value = "";
+};
 //async fetch for GIF, which is then loaded as the source of img
 async function getImage(query){
-    console.log(`${query}`);
     try {
     let apiFetch = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=bKU6BUVB00GBtKZxYXBWGSiQOI0hQBbP&q=${query}&limit=1&offset=0&rating=g&lang=en`, { mode: "cors"});
     let imgData = await apiFetch.json();
@@ -27,5 +27,6 @@ async function getImage(query){
     imgRes.src = imgUrl;
 } catch (err){
     console.error(err);
+    feedback.textContent = err.message;
 }
 };
