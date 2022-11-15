@@ -13,10 +13,12 @@ let feedback = document.querySelector("#feedback");
 submitButton.addEventListener("click", imageSearch);
 
 function imageSearch (){
+    feedback.textContent = "";
     imgRes.src = "#";
     let queryValue = searchWord.value;
     getImage(queryValue);
     searchWord.value = "";
+    
 };
 //async fetch for GIF, which is then loaded as the source of img
 async function getImage(query){
